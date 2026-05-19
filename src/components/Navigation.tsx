@@ -9,7 +9,7 @@ export default function Navigation() {
     { name: "Systems", href: "#projects" },
     { name: "Services", href: "#services" },
     { name: "About", href: "#about" },
-    { name: "Writing", href: "#writing" },
+    { name: "Skills", href: "#skills" },
     { name: "Contact", href: "#contact" },
   ];
 
