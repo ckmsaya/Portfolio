@@ -144,41 +144,50 @@ function SkillRow({
       transition={{ delay: i * 0.06, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       onMouseEnter={() => onHover(skill.id)}
       onMouseLeave={() => onHover(null)}
-      className={`group relative flex items-center gap-6 py-5 px-4 -mx-4 rounded-xl border transition-all duration-300 cursor-default
+      onClick={() => onHover(active ? null : skill.id)}
+      className={`group relative flex flex-col md:flex-row md:items-center gap-4 md:gap-6 py-5 px-4 -mx-4 rounded-xl border transition-all duration-300 cursor-pointer md:cursor-default
         ${active
           ? "border-white/10 bg-white/[0.04]"
           : "border-transparent hover:border-white/5 hover:bg-white/[0.02]"
         }`}
     >
-      {/* Index */}
-      <span className="hidden md:block w-10 shrink-0 font-mono text-[10px] text-brand-secondary/40 tracking-widest">
-        {skill.index}
-      </span>
+      {/* Top Row: Index + Label + Level */}
+      <div className="flex items-center gap-6 w-full">
+        {/* Index */}
+        <span className="hidden md:block w-10 shrink-0 font-mono text-[10px] text-brand-secondary/40 tracking-widest">
+          {skill.index}
+        </span>
 
-      {/* Dot + Label */}
-      <div className="flex items-center gap-3 w-48 shrink-0">
-        <span
-          className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
-          style={{
-            background: skill.color,
-            boxShadow: active ? `0 0 10px ${skill.color}88` : "none",
-          }}
-        />
-        <span
-          className="font-medium text-sm md:text-base tracking-tight transition-colors duration-300"
-          style={{ color: active ? skill.color : "inherit" }}
-        >
-          {skill.label}
+        {/* Dot + Label */}
+        <div className="flex items-center gap-3 flex-1 md:w-48 md:flex-none md:shrink-0">
+          <span
+            className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
+            style={{
+              background: skill.color,
+              boxShadow: active ? `0 0 10px ${skill.color}88` : "none",
+            }}
+          />
+          <span
+            className="font-medium text-sm md:text-base tracking-tight transition-colors duration-300"
+            style={{ color: active ? skill.color : "inherit" }}
+          >
+            {skill.label}
+          </span>
+        </div>
+
+        {/* Tag */}
+        <span className="hidden lg:block w-24 shrink-0 text-[9px] font-mono uppercase tracking-[0.2em] text-brand-secondary/50">
+          {skill.tag}
+        </span>
+
+        {/* Level */}
+        <span className="w-10 shrink-0 text-right font-mono text-xs text-brand-secondary/50">
+          {skill.level}%
         </span>
       </div>
 
-      {/* Tag */}
-      <span className="hidden lg:block w-24 shrink-0 text-[9px] font-mono uppercase tracking-[0.2em] text-brand-secondary/50">
-        {skill.tag}
-      </span>
-
       {/* Progress bar */}
-      <div className="flex-1 hidden md:block">
+      <div className="w-full md:flex-1">
         <div className="h-[2px] w-full bg-white/5 rounded-full overflow-hidden">
           <motion.div
             className="h-full rounded-full"
@@ -191,12 +200,19 @@ function SkillRow({
         </div>
       </div>
 
-      {/* Level */}
-      <span className="w-10 shrink-0 text-right font-mono text-xs text-brand-secondary/50">
-        {skill.level}%
-      </span>
+      {/* Desc — expands on tap/hover */}
+      <motion.div
+        initial={false}
+        animate={{ opacity: active ? 1 : 0, maxHeight: active ? 100 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full md:hidden overflow-hidden"
+      >
+        <p className="text-xs text-brand-secondary font-light leading-relaxed mt-3 pb-2">
+          {skill.desc}
+        </p>
+      </motion.div>
 
-      {/* Desc — expands on hover */}
+      {/* Desc on desktop */}
       <motion.div
         initial={false}
         animate={{ opacity: active ? 1 : 0, maxWidth: active ? 320 : 0 }}
