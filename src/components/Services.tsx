@@ -248,33 +248,33 @@ export default function Services() {
   const filtered = filter === "All" ? SERVICES : SERVICES.filter((s) => s.category === filter);
 
   return (
-    <section id="services" className="py-28 bg-surface-soft border-y border-subtle relative overflow-hidden">
+    <section id="services" className="py-16 sm:py-28 bg-surface-soft border-y border-subtle relative overflow-hidden">
       {/* Background texture */}
       <div className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{ backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)", backgroundSize: "40px 40px" }} />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
 
         {/* Header */}
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-16 space-y-4"
+          className="text-center max-w-3xl mx-auto mb-10 space-y-4 sm:mb-16"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-[10px] uppercase tracking-[0.4em] text-brand-secondary font-mono">How I Help</span>
-          <h2 className="text-4xl md:text-5xl font-medium tracking-tighter">
+          <span className="text-[9px] uppercase tracking-[0.26em] text-brand-secondary font-mono sm:text-[10px] sm:tracking-[0.4em]">How I Help</span>
+          <h2 className="text-[clamp(2rem,9vw,3rem)] font-medium tracking-tight leading-[1.08] md:text-5xl">
             Services &amp; Pricing
           </h2>
-          <p className="text-brand-secondary font-light text-lg">
+          <p className="text-brand-secondary font-light text-base sm:text-lg">
             Pricing built for founders and teams who need practical systems, not buzzwords.
           </p>
         </motion.div>
 
         {/* Category Filter */}
         <motion.div
-          className="flex flex-wrap justify-center gap-2 mb-14"
+          className="flex flex-wrap justify-center gap-2 mb-10 sm:mb-14"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -284,7 +284,7 @@ export default function Services() {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs tracking-widest uppercase font-mono border transition-all duration-200
+              className={`px-3 py-2 rounded-full text-[10px] tracking-wider uppercase font-mono border transition-all duration-200 sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-widest
                 ${filter === cat
                   ? "bg-white text-black border-white"
                   : "bg-white/5 text-brand-secondary border-white/10 hover:border-white/30 hover:text-white"
@@ -296,7 +296,7 @@ export default function Services() {
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {filtered.map((service, i) => (
               <motion.div
@@ -310,14 +310,14 @@ export default function Services() {
                 onClick={() => setActiveService(activeService === service.id ? null : service.id)}
               >
                 {/* Card */}
-                <div className={`relative rounded-2xl border p-6 h-full flex flex-col transition-all duration-300
+                <div className={`relative rounded-2xl border p-5 h-full flex flex-col transition-all duration-300 sm:p-6
                   ${activeService === service.id
                     ? "bg-white/10 border-white/30 shadow-lg shadow-black/30"
                     : "bg-white/[0.03] border-white/10 hover:bg-white/[0.06] hover:border-white/20"
                   }`}
                 >
                   {service.badge && (
-                    <span className="absolute -top-3 left-5 px-3 py-0.5 rounded-full bg-white text-black text-[9px] font-mono tracking-widest uppercase">
+                    <span className="absolute -top-3 left-5 rounded-full bg-white px-3 py-0.5 text-[8px] font-mono uppercase tracking-wider text-black sm:text-[9px] sm:tracking-widest">
                       {service.badge}
                     </span>
                   )}
@@ -330,7 +330,7 @@ export default function Services() {
                       }`}>
                       {service.icon}
                     </div>
-                    <span className="text-[9px] font-mono tracking-widest text-brand-secondary uppercase">{service.category}</span>
+                    <span className="max-w-[7rem] text-right text-[9px] font-mono tracking-wider text-brand-secondary uppercase sm:max-w-none sm:tracking-widest">{service.category}</span>
                   </div>
 
                   <h3 className="text-base font-medium tracking-tight mb-2 group-hover:translate-x-0.5 transition-transform">
@@ -341,12 +341,12 @@ export default function Services() {
                   </p>
 
                   {/* Price preview */}
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-end justify-between gap-3">
                     <div>
-                      <div className="text-[9px] text-brand-secondary font-mono uppercase tracking-widest mb-0.5">Starting from</div>
+                      <div className="text-[9px] text-brand-secondary font-mono uppercase tracking-wider mb-0.5 sm:tracking-widest">Starting from</div>
                       <div className="text-lg font-semibold tracking-tight">{service.tiers[0].price}</div>
                     </div>
-                    <div className={`flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider transition-all duration-300
+                    <div className={`shrink-0 flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider transition-all duration-300
                       ${activeService === service.id ? "text-white" : "text-brand-secondary group-hover:text-white"}`}>
                       {activeService === service.id ? "Hide" : "Pricing"}
                       <ArrowRight size={10} className={`transition-transform duration-300 ${activeService === service.id ? "rotate-90" : "group-hover:translate-x-0.5"}`} />
@@ -379,15 +379,15 @@ export default function Services() {
                                 Best Value
                               </span>
                             )}
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="flex items-center gap-2">
+                            <div className="flex items-start justify-between gap-3 mb-3">
+                              <div className="flex min-w-0 items-center gap-2">
                                 <span className={`flex items-center justify-center w-5 h-5 rounded-full text-[10px]
                                   ${tier.highlight ? "bg-white text-black" : "bg-white/10 text-brand-secondary"}`}>
                                   {TIER_ICONS[ti]}
                                 </span>
                                 <span className="text-xs font-medium tracking-tight">{tier.name}</span>
                               </div>
-                              <span className="text-sm font-semibold tracking-tight">{tier.price}</span>
+                              <span className="shrink-0 text-right text-sm font-semibold tracking-tight">{tier.price}</span>
                             </div>
                             <ul className="space-y-1.5">
                               {tier.features.map((f) => (
@@ -417,33 +417,33 @@ export default function Services() {
 
         {/* CTA Banner */}
         <motion.div
-          className="mt-20 rounded-2xl border border-white/10 bg-white/[0.03] p-10 text-center relative overflow-hidden"
+          className="mt-14 rounded-2xl border border-white/10 bg-white/[0.03] p-5 text-center relative overflow-hidden sm:mt-20 sm:p-10"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
         >
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
-          <span className="text-[10px] uppercase tracking-[0.4em] text-brand-secondary font-mono block mb-4">Not sure where to start?</span>
-          <h3 className="text-3xl md:text-4xl font-medium tracking-tighter mb-3">
+          <span className="text-[9px] uppercase tracking-[0.22em] text-brand-secondary font-mono block mb-4 sm:text-[10px] sm:tracking-[0.4em]">Not sure where to start?</span>
+          <h3 className="text-[clamp(1.75rem,8vw,2.25rem)] md:text-4xl font-medium tracking-tight leading-[1.1] mb-3">
             Let's build something great together
           </h3>
           <p className="text-brand-secondary font-light mb-8 max-w-xl mx-auto">
             Get a free consultation and custom quote tailored to your specific goals and budget.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
+          <div className="flex flex-col justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
               href="https://wa.me/27646261102"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full text-sm font-medium tracking-tight hover:bg-white/90 transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black rounded-full text-sm font-medium tracking-tight hover:bg-white/90 transition-all duration-200 hover:-translate-y-0.5 sm:px-8"
             >
               WhatsApp Us
               <ArrowRight size={14} />
             </a>
             <a
               href="tel:0646261102"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-transparent text-white border border-white/20 rounded-full text-sm font-medium tracking-tight hover:border-white/50 transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-transparent text-white border border-white/20 rounded-full text-sm font-medium tracking-tight hover:border-white/50 transition-all duration-200 hover:-translate-y-0.5 sm:px-8"
             >
               Call 064 626 1102
             </a>

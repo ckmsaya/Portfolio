@@ -17,9 +17,20 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  *, *::before, *::after {
+    min-width: 0;
+  }
+
   body {
     @apply bg-bg-main text-brand-primary antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    min-width: 320px;
+    overflow-x: hidden;
     background-image:
       radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.06), transparent 30%),
       radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.04), transparent 20%);
@@ -39,6 +50,15 @@
 
   h1, h2, h3, h4 {
     @apply tracking-tight;
+    overflow-wrap: anywhere;
+  }
+
+  p, a, button, span, li {
+    overflow-wrap: anywhere;
+  }
+
+  img {
+    max-width: 100%;
   }
 
   ::selection {
@@ -163,5 +183,21 @@
     --color-bg-card-rgb: 41, 18, 47;
     --color-border-subtle: rgba(244, 183, 255, 0.14);
     --color-selection-bg: rgba(244, 183, 255, 0.18);
+  }
+
+  @media (max-width: 640px) {
+    body {
+      background-size: 160% 160%, 150% 150%;
+    }
+
+    .glass {
+      @apply backdrop-blur-xl;
+    }
+  }
+
+  @media (max-height: 520px) and (orientation: landscape) {
+    section {
+      overflow: visible;
+    }
   }
 }

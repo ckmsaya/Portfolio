@@ -145,21 +145,21 @@ function SkillRow({
       onMouseEnter={() => onHover(skill.id)}
       onMouseLeave={() => onHover(null)}
       onClick={() => onHover(active ? null : skill.id)}
-      className={`group relative flex flex-col md:flex-row md:items-center gap-4 md:gap-6 py-5 px-4 -mx-4 rounded-xl border transition-all duration-300 cursor-pointer md:cursor-default
+      className={`group relative flex flex-col md:flex-row md:items-center gap-4 md:gap-6 py-5 px-3 -mx-3 rounded-xl border transition-all duration-300 cursor-pointer md:cursor-default sm:px-4 sm:-mx-4
         ${active
           ? "border-white/10 bg-white/[0.04]"
           : "border-transparent hover:border-white/5 hover:bg-white/[0.02]"
         }`}
     >
       {/* Top Row: Index + Label + Level */}
-      <div className="flex items-center gap-6 w-full">
+        <div className="flex items-center gap-3 w-full sm:gap-6">
         {/* Index */}
         <span className="hidden md:block w-10 shrink-0 font-mono text-[10px] text-brand-secondary/40 tracking-widest">
           {skill.index}
         </span>
 
         {/* Dot + Label */}
-        <div className="flex items-center gap-3 flex-1 md:w-48 md:flex-none md:shrink-0">
+        <div className="flex min-w-0 items-center gap-3 flex-1 md:w-48 md:flex-none md:shrink-0">
           <span
             className="w-2 h-2 rounded-full shrink-0 transition-all duration-300"
             style={{
@@ -252,7 +252,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={sectionRef}
-      className="py-24 bg-surface-soft relative overflow-hidden"
+      className="py-16 sm:py-24 bg-surface-soft relative overflow-hidden"
     >
       {/* Ambient glow */}
       <div
@@ -263,10 +263,10 @@ export default function Skills() {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 relative z-10">
 
         {/* ── Header ── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-white/5 pb-10 gap-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 border-b border-white/5 pb-8 gap-8 sm:mb-16 sm:pb-10">
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -274,10 +274,10 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="text-[10px] uppercase tracking-[0.4em] text-brand-secondary font-mono">
+            <span className="text-[9px] uppercase tracking-[0.26em] text-brand-secondary font-mono sm:text-[10px] sm:tracking-[0.4em]">
               Arsenal
             </span>
-            <h2 className="text-4xl md:text-5xl font-medium tracking-tighter leading-none">
+            <h2 className="text-[clamp(2rem,9vw,3rem)] md:text-5xl font-medium tracking-tight leading-[1.08]">
               Skills &{" "}
               <span className="italic font-light text-brand-secondary">
                 Expertise
@@ -291,7 +291,7 @@ export default function Skills() {
 
           {/* Stats */}
           <motion.div
-            className="flex gap-10 shrink-0"
+            className="flex gap-8 shrink-0 sm:gap-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -329,7 +329,7 @@ export default function Skills() {
             <button
               key={tag}
               onClick={() => setActiveTag(tag)}
-              className={`px-4 py-1.5 rounded-full text-[10px] font-mono uppercase tracking-[0.2em] border transition-all duration-200
+              className={`px-3 py-2 rounded-full text-[10px] font-mono uppercase tracking-[0.14em] border transition-all duration-200 sm:px-4 sm:py-1.5 sm:tracking-[0.2em]
                 ${activeTag === tag
                   ? "bg-white text-black border-white"
                   : "bg-transparent text-brand-secondary border-white/10 hover:border-white/30 hover:text-white"
@@ -341,9 +341,9 @@ export default function Skills() {
         </motion.div>
 
         {/* ── Column Headers ── */}
-        <div className="flex items-center gap-6 px-4 mb-2">
+        <div className="flex items-center gap-3 px-3 mb-2 sm:gap-6 sm:px-4">
           <span className="hidden md:block w-10 shrink-0 font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">#</span>
-          <span className="w-48 shrink-0 font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">Skill</span>
+          <span className="flex-1 md:w-48 md:flex-none md:shrink-0 font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">Skill</span>
           <span className="hidden lg:block w-24 shrink-0 font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">Category</span>
           <span className="flex-1 hidden md:block font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">Proficiency</span>
           <span className="w-10 text-right font-mono text-[9px] uppercase tracking-widest text-brand-secondary/30">Lvl</span>

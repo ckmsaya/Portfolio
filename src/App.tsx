@@ -33,29 +33,46 @@ export default function App() {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-        if (!visibleEntries.length) {
-          return;
-        }
+    let frame = 0;
 
-        visibleEntries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        setActiveSection((visibleEntries[0].target.id as SectionId) || "hero");
-      },
-      {
-        root: null,
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: 0.2,
-      },
-    );
+    const updateActiveSection = () => {
+      const viewportAnchor = window.innerHeight * 0.42;
+      const closest = sections.reduce(
+        (best, section) => {
+          const rect = section.getBoundingClientRect();
+          const distance = Math.abs(rect.top - viewportAnchor);
+          const isOnScreen = rect.bottom > 0 && rect.top < window.innerHeight;
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+          if (isOnScreen && distance < best.distance) {
+            return { id: section.id as SectionId, distance };
+          }
+
+          return best;
+        },
+        { id: "hero" as SectionId, distance: Number.POSITIVE_INFINITY },
+      );
+
+      setActiveSection(closest.id);
+    };
+
+    const queueUpdate = () => {
+      window.cancelAnimationFrame(frame);
+      frame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    queueUpdate();
+    window.addEventListener("scroll", queueUpdate, { passive: true });
+    window.addEventListener("resize", queueUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", queueUpdate);
+      window.removeEventListener("resize", queueUpdate);
+    };
   }, []);
 
   return (
-    <div className="min-h-screen selection:bg-brand-secondary selection:text-brand-primary overflow-hidden">
+    <div className="min-h-screen selection:bg-brand-secondary selection:text-brand-primary overflow-x-hidden">
       <Navigation />
       <main>
         <Hero />
@@ -69,4 +86,3 @@ export default function App() {
     </div>
   );
 }
-

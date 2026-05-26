@@ -21,7 +21,7 @@ export default function Footer() {
             <a href="#projects" className="hover:text-white transition-colors">Portfolio</a>
             <a href="#services" className="hover:text-white transition-colors">Expertise</a>
             <a href="#about" className="hover:text-white transition-colors">Biography</a>
-            <a href="#writing" className="hover:text-white transition-colors">Writing</a>
+            <a href="#writing" className="hover:text-white transition-colors">Skills</a>
           </div>
 
           <div className="text-[10px] uppercase tracking-widest text-zinc-600">
@@ -29,7 +29,7 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-white/[0.02] text-center">
+        <div className="mt-12 pt-8 border-t border-white/2 text-center">
           <p className="text-[9px] uppercase tracking-[0.5em] text-zinc-700 font-mono">
             Optimized for human progress • Built with intent
           </p>

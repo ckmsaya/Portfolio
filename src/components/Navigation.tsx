@@ -14,19 +14,19 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between glass rounded-full px-6 py-3">
+    <nav className="fixed top-0 w-full z-50 px-4 py-3 sm:px-6 sm:py-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 glass rounded-2xl px-4 py-3 sm:rounded-full sm:px-6">
         <motion.button
           type="button"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-2 cursor-pointer"
+          className="flex min-w-0 items-center gap-2 cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="w-8 h-8 bg-white text-black rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 shrink-0 bg-white text-black rounded-lg flex items-center justify-center">
             <Rocket size={18} />
           </div>
-          <span className="font-mono font-medium tracking-tighter text-sm uppercase">Conrad Msaya</span>
+          <span className="font-mono font-medium tracking-tight text-xs uppercase truncate sm:text-sm">Conrad Msaya</span>
         </motion.button>
 
         {/* Desktop Nav */}
@@ -54,7 +54,11 @@ export default function Navigation() {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          className="md:hidden shrink-0 rounded-full p-2 text-white transition-colors hover:bg-white/10"
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -64,7 +68,7 @@ export default function Navigation() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="md:hidden absolute top-20 left-6 right-6 glass rounded-2xl p-6 flex flex-col gap-4"
+          className="md:hidden absolute top-20 left-4 right-4 max-h-[calc(100svh-6rem)] overflow-y-auto glass rounded-2xl p-5 flex flex-col gap-3 sm:left-6 sm:right-6"
         >
           {navLinks.map((link) => (
             <a
